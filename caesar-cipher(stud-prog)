@@ -1,0 +1,49 @@
+
+#pseudocode
+#create end_text to collect next encoded message
+#create prompt to prompt the user for shift  amount
+#then that shift input will mod 26 to have the acceptable shift value
+#loop through the message, if character in alphabet
+
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+            'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+#create variable like msg,shift_input,shift_amount  to be use as reference for hacking_cipher()
+
+msg=input("Enter your message here:\n").lower()
+crypt_input=input("Enter 'encode' or 'decode':\n").lower()
+shift_input=int(input("Enter the shift input in numerical values:\n"))
+new_shift=shift_input%26
+def hacking_cipher(txt,shift_amt, mode):
+    end_text=""
+    if mode=='decode':
+        shift_amt*=-1
+    for char in txt:
+        if char in alphabet:
+            pos=alphabet.index(char)
+            new_pos=(shift_amt+pos)%26
+            end_text+=alphabet[new_pos]
+        else:
+            end_text+=char
+    return end_text
+hacking_cipher(txt=msg,shift_amt=shift_input,mode=crypt_input)
+while True:
+    print("==Cipher Menu==")
+    print("1.encode")
+    print("2.decode")
+    print("3.exit")
+    choice=input("Enter 1,2 or 3:\n")
+    if choice=='1':
+        msg=input("Enter your message here:\n").lower()
+        shift_input=int(input("Enter the shift input in numerical values:\n"))
+        hacking_cipher(txt=msg,shift_amt=shift_input,mode="encode")
+    elif choice=='2':
+        msg=input("Enter your message here:\n").lower()
+        shift_input=int(input("Enter the shift input in numerical values:\n"))
+        hacking_cipher(txt=msg,shift_amt=shift_input,mode="decode")
+    elif choice=='3':
+         print("Exiting...")
+         break 
+        
+    else:
+        print("Invalid input")
